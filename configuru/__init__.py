@@ -2,7 +2,7 @@
 
 __author__ = """robotnaoborot"""
 __email__ = 'robotnaoborot@gmail.com'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 import os, inspect, re
 
@@ -21,8 +21,11 @@ class Config:
         for key, value in inspect.getmembers(self):
             if key.startswith("_") or key not in self.__annotations__:
                 continue
+            var_type = self.__annotations__[key]
+            if hasattr(var_type, '__origin__':
+                    var_type = var_type.__origin__
             setattr(
-                self, key, self.__annotations__[key](os.environ.get(key.upper(), value))
+                self, key, var_type(os.environ.get(key.upper(), value))
             )
 
 __all__ = ['Config', '__author__', '__email__', '__version__']
