@@ -2,7 +2,7 @@
 
 __author__ = """robotnaoborot"""
 __email__ = 'robotnaoborot@gmail.com'
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 import os, inspect, re
 
@@ -22,7 +22,7 @@ class Config:
             if key.startswith("_") or key not in self.__annotations__:
                 continue
             var_type = self.__annotations__[key]
-            if hasattr(var_type, '__origin__':
+            if hasattr(var_type, '__origin__'):
                     var_type = var_type.__origin__
             setattr(
                 self, key, var_type(os.environ.get(key.upper(), value))
